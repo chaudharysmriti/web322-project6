@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Project - <%= project.title %></title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body tabindex="-1">
+  <%- include('partials/navbar', { page: '' }) %>
+  
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Edit Project: <%= project.title %></h1>
+        </div>
+      </div>
+    </div>
+
+    <form method="POST" action="/solutions/editProject">
+      <input type="hidden" name="id" value="<%= project.id %>">
+
+      <div class="form-group">
+        <label for="title">Project Title</label>
+        <input type="text" name="title" id="title" value="<%= project.title %>" required class="input input-bordered w-full" />
+      </div>
+
+      <div class="form-group">
+        <label for="feature_img_url">Feature Image URL</label>
+        <input type="text" name="feature_img_url" id="feature_img_url" value="<%= project.feature_img_url %>" required class="input input-bordered w-full" />
+      </div>
+
+      <div class="form-group">
+        <label for="summary_short">Short Summary</label>
+        <textarea name="summary_short" id="summary_short" required class="textarea textarea-bordered w-full"><%= project.summary_short %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="intro_short">Introduction</label>
+        <textarea name="intro_short" id="intro_short" required class="textarea textarea-bordered w-full"><%= project.intro_short %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="impact">Impact</label>
+        <textarea name="impact" id="impact" required class="textarea textarea-bordered w-full"><%= project.impact %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="original_source_url">Original Source URL</label>
+        <input type="text" name="original_source_url" id="original_source_url" value="<%= project.original_source_url %>" required class="input input-bordered w-full" />
+      </div>
+
+      <div class="form-group">
+        <label for="sector_id">Sector</label>
+        <select name="sector_id" id="sector_id" required class="select select-bordered w-full">
+          <% sectors.forEach(sector => { %>
+            <option <%= (project.sector_id == sector.id) ? "selected" : "" %> value="<%= sector.id %>">
+              <%= sector.sector_name %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update Project</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

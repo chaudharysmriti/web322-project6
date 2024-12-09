@@ -1,0 +1,21 @@
+<h1>User History</h1>
+<div>
+  <p>Username: <%= session.user.userName %></p>
+  <p>Email: <%= session.user.email %></p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Login Date/Time</th>
+      <th>Client Information</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% session.user.loginHistory.forEach((history) => { %>
+      <tr>
+        <td><%= new Date(history.dateTime).toLocaleString() %></td>
+        <td><%= history.userAgent %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
